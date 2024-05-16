@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 import json
-import csv
 import pandas as pd
 from hem import run_project, weather_data_to_dict
 
@@ -53,14 +52,13 @@ run_project(
 
 
 
-
 """
 ### Outputs preview
 """
+
 # Create a dropdown menu to select the dataset
 selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
-for root, dirs, files in os.walk(output_folder_name):
-    st.text(files)
+
 # Display the selected dataset
 if selected_dataset == "Results":
     results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
@@ -71,35 +69,15 @@ elif selected_dataset == "Static Results":
     st.text("Static Results Dataset:")
     st.write(static_results)
 elif selected_dataset == "Summary Results":
-    st.text("Summary results:")
-    csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
-    # Initialize variables
-    tables = []
-    current_table = []
-
-    # Read the CSV file line by line
-    with open(csv_file_path, 'r') as file:
-        reader = csv.reader(file)
-        
-        for row in reader:
-            st.text(row)
-            # Skip empty rows
-            if not any(row):
-                continue
-            # Check if the row is the start of a new table
-            if 'Summary' in row[0]:
-                # If current_table is not empty, add it to the tables list
-                if current_table:
-                    tables.append(current_table)
-                    current_table = []
-            # Add the row to the current table
-            current_table.append(row)
-    # If there is remaining data in current_table, add it to tables
-    if current_table:
-        tables.append(current_table)
-    # Now you have a list of tables, each represented as a list of rows
-    # You can parse these tables using pandas or process them as needed
-    for table in tables:
-        # Convert the table into a pandas DataFrame
-        df = pd.DataFrame(table[1:], columns=table[0])
-        st.write(df)
+    summary_results1 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=1)
+    summary_results2 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=5)
+    summary_results3 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=7)
+    summary_results4 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=19)
+    
+    st.text("Energy Demand Summary:")
+    st.write(summary_results1)
+    st.text("Electricity Summary:")
+    st.write(summary_results2)
+    st.text("Delivered Energy Summary:")
+    st.write(summary_results3)
+    st.write(summary_results4)
