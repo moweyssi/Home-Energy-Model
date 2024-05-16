@@ -71,28 +71,28 @@ elif selected_dataset == "Static Results":
 elif selected_dataset == "Summary Results":
     csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
     # Read the entire file as one big string
-with open(csv_file_path, 'r') as file:
-    csv_content = file.read()
-
-    # Split the content into separate tables based on the presence of specific headers
-    tables = []
-    current_table = []
-    for line in csv_content.split('\n'):
-        if line.strip() == "":
-            continue
-        if "Summary" in line:
-            if current_table:
-                tables.append(current_table)
-                current_table = []
-        current_table.append(line.split(','))
-
-    # If there is remaining data in current_table, add it to tables
-    if current_table:
-        tables.append(current_table)
-
-    # Display each table using Streamlit
-    for table in tables:
-        # Convert the table into a pandas DataFrame
-        df = pd.DataFrame(table[1:], columns=table[0])
-        st.write(df)
-        st.write("-------------")
+    with open(csv_file_path, 'r') as file:
+        csv_content = file.read()
+    
+        # Split the content into separate tables based on the presence of specific headers
+        tables = []
+        current_table = []
+        for line in csv_content.split('\n'):
+            if line.strip() == "":
+                continue
+            if "Summary" in line:
+                if current_table:
+                    tables.append(current_table)
+                    current_table = []
+            current_table.append(line.split(','))
+    
+        # If there is remaining data in current_table, add it to tables
+        if current_table:
+            tables.append(current_table)
+    
+        # Display each table using Streamlit
+        for table in tables:
+            # Convert the table into a pandas DataFrame
+            df = pd.DataFrame(table[1:], columns=table[0])
+            st.write(df)
+            st.write("-------------")
