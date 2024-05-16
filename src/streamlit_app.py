@@ -16,7 +16,10 @@ inp_filename = st.selectbox("Which demo file?",filenames)
 # Read the JSON file as a string
 with open(inp_filename, 'r') as file:
     json_string = file.read()
-st.json(json_string)
+"""
+## Input json preview
+"""
+st.json(json_string,expanded=False)
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
 
 # Split the file path by '/'
