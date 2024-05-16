@@ -1,7 +1,18 @@
+import streamlit as st
+import os
 from hem import run_project, weather_data_to_dict
 
+def get_json_filepaths(folder_path):
+    json_filepaths = []
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.json'):
+                json_filepaths.append(os.path.join(root, file))
+    return json_filepaths
+#inp_filename = 'test/demo_files/core/demo.json'
+filenames = get_json_filepaths("../test/demo_files/core/")
+inp_filename = st.select(filenames)
 
-inp_filename = 'test/demo_files/core/demo.json'
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
 run_project(
     inp_filename,
