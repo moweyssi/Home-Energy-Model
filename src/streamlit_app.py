@@ -77,7 +77,9 @@ elif selected_dataset == "Summary Results":
     # Read the CSV file line by line
     with open(csv_file_path, 'r') as file:
         reader = csv.reader(file)
+        
         for row in reader:
+            st.text(row)
             # Skip empty rows
             if not any(row):
                 continue
