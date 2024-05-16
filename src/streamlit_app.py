@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import json
 from hem import run_project, weather_data_to_dict
 
 def get_json_filepaths(folder_path):
@@ -12,6 +13,10 @@ def get_json_filepaths(folder_path):
 #inp_filename = 'test/demo_files/core/demo.json'
 filenames = get_json_filepaths("test/demo_files/core/")
 inp_filename = st.selectbox("Which demo file?",filenames)
+# Read the JSON file as a string
+with open(inp_filename, 'r') as file:
+    json_string = file.read()
+st.json(json_string)
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
 
 # Split the file path by '/'
