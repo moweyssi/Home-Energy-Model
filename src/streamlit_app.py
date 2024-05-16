@@ -11,7 +11,7 @@ def get_json_filepaths(folder_path):
     return json_filepaths
 #inp_filename = 'test/demo_files/core/demo.json'
 filenames = get_json_filepaths("../test/demo_files/core/")
-inp_filename = st.select(filenames)
+inp_filename = st.text(filenames)
 
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
 run_project(
