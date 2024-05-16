@@ -70,22 +70,24 @@ elif selected_dataset == "Static Results":
     st.write(static_results)
 elif selected_dataset == "Summary Results":
     csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
+    df = pd.read_excel(csv_file_path, header=None)
+    st.write(df)
     # Read the entire file as one big string
     # Read the entire file as one big string
-    with open(csv_file_path, 'r') as file:
-        csv_content = file.read()
-    
-    # Split the content into separate tables based on empty lines
-    tables_content = csv_content.split('\n\n')
-    
-    # Display each table using Streamlit
-    for table_content in tables_content:
-        # Skip empty tables
-        if not table_content.strip():
-            continue
-        # Convert the table content into a pandas DataFrame
-        lines = table_content.strip().split('\n')
-        table_data = [line.split(',') for line in lines]
-        df = pd.DataFrame(table_data[1:], columns=table_data[0])
-        st.write(df)
-        st.write("-------------")
+    #with open(csv_file_path, 'r') as file:
+    #    csv_content = file.read()
+#
+    ## Split the content into separate tables based on empty lines
+    #tables_content = csv_content.split('\n\n')
+#
+    ## Display each table using Streamlit
+    #for table_content in tables_content:
+    #    # Skip empty tables
+    #    if not table_content.strip():
+    #        continue
+    #    # Convert the table content into a pandas DataFrame
+    #    lines = table_content.strip().split('\n')
+    #    table_data = [line.split(',') for line in lines]
+    #    df = pd.DataFrame(table_data[1:], columns=table_data[0])
+    #    st.write(df)
+    #    st.write("-------------")
