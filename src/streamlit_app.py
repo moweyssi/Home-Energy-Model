@@ -59,14 +59,14 @@ selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", 
 
 # Display the selected dataset
 if selected_dataset == "Results":
-    results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
+    results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv',error_bad_lines=False)
     st.text("Results Dataset:")
     st.write(results)
 elif selected_dataset == "Static Results":
-    static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
+    static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv',error_bad_lines=False)
     st.text("Static Results Dataset:")
     st.write(static_results)
 elif selected_dataset == "Summary Results":
-    summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv')
+    summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',error_bad_lines=False)
     st.text("Summary Results Dataset:")
     st.write(summary_results)
