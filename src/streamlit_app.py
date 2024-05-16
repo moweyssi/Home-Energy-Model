@@ -13,6 +13,14 @@ def get_json_filepaths(folder_path):
 filenames = get_json_filepaths("test/demo_files/core/")
 inp_filename = st.selectbox("Which demo file?",filenames)
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
+
+# Split the file path by '/'
+parts = inp_filename.split('/')
+# Find the index of 'core/'
+core_index = parts.index('core')
+# Get the part after 'core/' and remove the '.json' extension
+output_folder_name = parts[core_index + 1].replace('.json', '') + '__results'
+st.text(output_folder_name)
 run_project(
     inp_filename,
     external_conditions_dict,
