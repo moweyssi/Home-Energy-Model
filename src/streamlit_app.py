@@ -63,15 +63,15 @@ selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", 
 if selected_dataset == "Results":
     results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
     st.text("Results Dataset:")
-    st.write(results)
+    st.dataframe(results)
 elif selected_dataset == "Static Results":
     static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
     st.text("Static Results Dataset:")
-    st.write(static_results)
+    st.dataframe(static_results)
 elif selected_dataset == "Summary Results":
     csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
     df = pd.read_csv(csv_file_path,header=None,names=['1','2','3','4','5','6'])
-    st.write(df)
+    st.dataframe(df)
     # Read the entire file as one big string
     # Read the entire file as one big string
     #with open(csv_file_path, 'r') as file:
