@@ -50,20 +50,23 @@ run_project(
     use_fast_solver=False,
     )
 
-results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
-static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
-#summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv')
+
+
+
 
 # Create a dropdown menu to select the dataset
 selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
 
 # Display the selected dataset
 if selected_dataset == "Results":
+    results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
     st.text("Results Dataset:")
     st.write(results)
 elif selected_dataset == "Static Results":
+    static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
     st.text("Static Results Dataset:")
     st.write(static_results)
-#elif selected_dataset == "Summary Results":
-#    st.text("Summary Results Dataset:")
-#    st.write(summary_results)
+elif selected_dataset == "Summary Results":
+    summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv')
+    st.text("Summary Results Dataset:")
+    st.write(summary_results)
