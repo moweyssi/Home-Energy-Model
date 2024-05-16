@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import json
+import pandas as pd
 from hem import run_project, weather_data_to_dict
 
 def get_json_filepaths(folder_path):
@@ -19,7 +20,7 @@ inp_filename = st.selectbox("Which demo file?",filenames)
 # Read the JSON file as a string
 with open(inp_filename, 'r') as file:
     json_string = file.read()
-    
+
 """
 ### Input json preview
 """
@@ -31,7 +32,8 @@ parts = inp_filename.split('/')
 # Find the index of 'core/'
 core_index = parts.index('core')
 # Get the part after 'core/' and remove the '.json' extension
-output_folder_name = 'test/demo_files/core/'+parts[core_index + 1].replace('.json', '') + '__results/'
+output_object_name = parts[core_index + 1].replace('.json', '') + '__results'
+output_folder_name = 'test/demo_files/core/'+output_object_name+'/'
 st.text(output_folder_name)
 run_project(
     inp_filename,
@@ -47,3 +49,21 @@ run_project(
     detailed_output_heating_cooling=False,
     use_fast_solver=False,
     )
+
+results = pd.read_csv(output_folder_name+output_object_name+'.csv')
+static_results = pd.read_csv(output_folder_name+output_object_name+'_static.csv')
+summary_results = pd.read_csv(output_folder_name+output_object_name+'_summary.csv')
+
+# Create a dropdown menu to select the dataset
+selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
+
+# Display the selected dataset
+if selected_dataset == "Results":
+    st.text("Results Dataset:")
+    st.write(results)
+elif selected_dataset == "Static Results":
+    st.text("Static Results Dataset:")
+    st.write(static_results)
+elif selected_dataset == "Summary Results":
+    st.text("Summary Results Dataset:")
+    st.write(summary_results)
