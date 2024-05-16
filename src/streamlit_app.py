@@ -59,7 +59,8 @@ run_project(
 """
 # Create a dropdown menu to select the dataset
 selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
-
+for root, dirs, files in os.walk(output_folder_name):
+    st.text(files)
 # Display the selected dataset
 if selected_dataset == "Results":
     results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
