@@ -59,14 +59,20 @@ selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", 
 
 # Display the selected dataset
 if selected_dataset == "Results":
-    results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv',error_bad_lines=False)
+    results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
     st.text("Results Dataset:")
     st.write(results)
 elif selected_dataset == "Static Results":
-    static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv',error_bad_lines=False)
+    static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
     st.text("Static Results Dataset:")
     st.write(static_results)
 elif selected_dataset == "Summary Results":
-    summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',error_bad_lines=False)
+    summary_results1 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=1)
+    summary_results2 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=5)
+    summary_results3 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=7)
+    summary_results4 = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv',skiprows=19)
     st.text("Summary Results Dataset:")
-    st.write(summary_results)
+    st.write(summary_results1)
+    st.write(summary_results2)
+    st.write(summary_results3)
+    st.write(summary_results4)
