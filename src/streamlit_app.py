@@ -21,6 +21,7 @@ def get_epw_filepaths(folder_path):
     return epw_filepaths
 #inp_filename = 'test/demo_files/core/demo.json'
 json_filenames = get_json_filepaths("test/demo_files/core/")
+# find them here https://www.ladybug.tools/epwmap/
 epw_filenames = get_epw_filepaths("./")
 """
 ### Select demo file
