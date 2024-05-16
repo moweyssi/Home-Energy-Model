@@ -19,7 +19,7 @@ parts = inp_filename.split('/')
 # Find the index of 'core/'
 core_index = parts.index('core')
 # Get the part after 'core/' and remove the '.json' extension
-output_folder_name = parts[core_index + 1].replace('.json', '') + '__results'
+output_folder_name = 'test/demo_files/core/'+parts[core_index + 1].replace('.json', '') + '__results/'
 st.text(output_folder_name)
 run_project(
     inp_filename,
