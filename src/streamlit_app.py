@@ -10,7 +10,7 @@ def get_json_filepaths(folder_path):
                 json_filepaths.append(os.path.join(root, file))
     return json_filepaths
 #inp_filename = 'test/demo_files/core/demo.json'
-filenames = get_json_filepaths("../test/demo_files/core/")
+filenames = get_json_filepaths("test/demo_files/core/")
 inp_filename = st.text(filenames)
 test = st.text(os.getcwd())
 external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
