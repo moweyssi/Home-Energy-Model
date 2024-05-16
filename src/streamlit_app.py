@@ -70,7 +70,7 @@ elif selected_dataset == "Static Results":
     st.write(static_results)
 elif selected_dataset == "Summary Results":
     csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
-    df = pd.read_csv(csv_file_path,skip_blank_lines=True,nrows=50,header=None,names=['1','2','3','4','5','6'])
+    df = pd.read_csv(csv_file_path,header=None,names=['1','2','3','4','5','6'])
     st.write(df)
     # Read the entire file as one big string
     # Read the entire file as one big string
