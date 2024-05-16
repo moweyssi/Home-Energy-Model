@@ -63,31 +63,13 @@ selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", 
 if selected_dataset == "Results":
     results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
     st.text("Results Dataset:")
-    st.dataframe(results)
+    st.dataframe(results,use_container_width=True)
 elif selected_dataset == "Static Results":
     static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
     st.text("Static Results Dataset:")
-    st.dataframe(static_results)
+    st.dataframe(static_results,use_container_width=True)
 elif selected_dataset == "Summary Results":
     csv_file_path = output_folder_name+output_object_name+'__core__results_summary.csv'
-    df = pd.read_csv(csv_file_path,header=None,names=['1','2','3','4','5','6'])
-    st.dataframe(df)
-    # Read the entire file as one big string
-    # Read the entire file as one big string
-    #with open(csv_file_path, 'r') as file:
-    #    csv_content = file.read()
-#
-    ## Split the content into separate tables based on empty lines
-    #tables_content = csv_content.split('\n\n')
-#
-    ## Display each table using Streamlit
-    #for table_content in tables_content:
-    #    # Skip empty tables
-    #    if not table_content.strip():
-    #        continue
-    #    # Convert the table content into a pandas DataFrame
-    #    lines = table_content.strip().split('\n')
-    #    table_data = [line.split(',') for line in lines]
-    #    df = pd.DataFrame(table_data[1:], columns=table_data[0])
-    #    st.write(df)
-    #    st.write("-------------")
+    summary_results = pd.read_csv(csv_file_path,header=None,names=['1','2','3','4','5','6'])
+    st.text("Summary Results Dataset:")
+    st.dataframe(summary_results,use_container_width=True)
