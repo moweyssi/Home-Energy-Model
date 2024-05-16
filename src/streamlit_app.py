@@ -54,7 +54,9 @@ run_project(
 
 
 
-
+"""
+### Outputs preview
+"""
 # Create a dropdown menu to select the dataset
 selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
 
