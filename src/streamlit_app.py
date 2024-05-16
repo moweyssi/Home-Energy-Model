@@ -11,12 +11,22 @@ def get_json_filepaths(folder_path):
             if file.endswith('.json'):
                 json_filepaths.append(os.path.join(root, file))
     return json_filepaths
+
+def get_epw_filepaths(folder_path):
+    epw_filepaths = []
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.epw'):
+                epw_filepaths.append(os.path.join(root, file))
+    return epw_filepaths
 #inp_filename = 'test/demo_files/core/demo.json'
-filenames = get_json_filepaths("test/demo_files/core/")
+json_filenames = get_json_filepaths("test/demo_files/core/")
+epw_filenames = get_json_filepaths("/")
 """
 ### Select demo file
 """
-inp_filename = st.selectbox("Which demo file?",filenames)
+inp_filename = st.selectbox("Which demo file?",json_filenames)
+epw_file = st.selectbox("Which weather file?",epw_filenames)
 # Read the JSON file as a string
 with open(inp_filename, 'r') as file:
     json_string = file.read()
@@ -25,7 +35,7 @@ with open(inp_filename, 'r') as file:
 ### Input json preview
 """
 st.json(json_string,expanded=False)
-external_conditions_dict = weather_data_to_dict('GBR_SCT_Edinburgh.Gogarbank.031660_TMYx.epw')
+external_conditions_dict = weather_data_to_dict(epw_file)
 
 # Split the file path by '/'
 parts = inp_filename.split('/')
