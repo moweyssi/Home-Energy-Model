@@ -32,9 +32,9 @@ parts = inp_filename.split('/')
 # Find the index of 'core/'
 core_index = parts.index('core')
 # Get the part after 'core/' and remove the '.json' extension
-output_object_name = parts[core_index + 1].replace('.json', '') + '__results'
-output_folder_name = 'test/demo_files/core/'+output_object_name+'/'
-st.text(output_folder_name)
+output_object_name = parts[core_index + 1].replace('.json', '')
+output_folder_name = 'test/demo_files/core/'+output_object_name+'__results/'
+
 run_project(
     inp_filename,
     external_conditions_dict,
@@ -50,9 +50,9 @@ run_project(
     use_fast_solver=False,
     )
 
-results = pd.read_csv(output_folder_name+output_object_name+'.csv')
-static_results = pd.read_csv(output_folder_name+output_object_name+'_static.csv')
-summary_results = pd.read_csv(output_folder_name+output_object_name+'_summary.csv')
+results = pd.read_csv(output_folder_name+output_object_name+'__core__results.csv')
+static_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_static.csv')
+summary_results = pd.read_csv(output_folder_name+output_object_name+'__core__results_summary.csv')
 
 # Create a dropdown menu to select the dataset
 selected_dataset = st.selectbox("Select Dataset", ["Results", "Static Results", "Summary Results"])
