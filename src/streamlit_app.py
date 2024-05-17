@@ -47,10 +47,10 @@ def generate_json(data):
 st.title('JSON File Generator')
 
 # Input for SimulationTime
-st.header('SimulationTime')
-start_time = st.number_input('Start Time', value=5088)
-end_time = st.number_input('End Time', value=5112)
-step_time = st.number_input('Step Time', value=1)
+with st.expander('SimulationTime', expanded=False):
+    start_time = st.number_input('Start Time', value=5088)
+    end_time = st.number_input('End Time', value=5112)
+    step_time = st.number_input('Step Time', value=1)
 
 simulation_time = {
     "start": start_time,
@@ -59,28 +59,27 @@ simulation_time = {
 }
 
 # Input for ExternalConditions
-st.header('ExternalConditions')
+with st.expander('ExternalConditions', expanded=False):
+    def get_list_input(label, count, default):
+        return [st.number_input(f'{label} {i+1}', value=default) for i in range(count)]
 
-def get_list_input(label, count, default):
-    return [st.number_input(f'{label} {i+1}', value=default) for i in range(count)]
+    air_temperatures = get_list_input('Air Temperature', 24, 19.0)
+    wind_speeds = get_list_input('Wind Speed', 24, 3.9)
+    ground_temperatures = get_list_input('Ground Temperature', 24, 8.0)
+    diffuse_horizontal_radiation = get_list_input('Diffuse Horizontal Radiation', 24, 0)
+    direct_beam_radiation = get_list_input('Direct Beam Radiation', 24, 0)
+    solar_reflectivity_of_ground = get_list_input('Solar Reflectivity of Ground', 24, 0.2)
 
-air_temperatures = get_list_input('Air Temperature', 24, 19.0)
-wind_speeds = get_list_input('Wind Speed', 24, 3.9)
-ground_temperatures = get_list_input('Ground Temperature', 24, 8.0)
-diffuse_horizontal_radiation = get_list_input('Diffuse Horizontal Radiation', 24, 0)
-direct_beam_radiation = get_list_input('Direct Beam Radiation', 24, 0)
-solar_reflectivity_of_ground = get_list_input('Solar Reflectivity of Ground', 24, 0.2)
-
-latitude = st.number_input('Latitude', value=51.383)
-longitude = st.number_input('Longitude', value=-0.783)
-timezone = st.number_input('Timezone', value=0)
-start_day = st.number_input('Start Day', value=212)
-end_day = st.number_input('End Day', value=212)
-time_series_step = st.number_input('Time Series Step', value=1)
-january_first = st.number_input('January First', value=1)
-daylight_savings = st.text_input('Daylight Savings', value="not applicable")
-leap_day_included = st.checkbox('Leap Day Included', value=False)
-direct_beam_conversion_needed = st.checkbox('Direct Beam Conversion Needed', value=False)
+    latitude = st.number_input('Latitude', value=51.383)
+    longitude = st.number_input('Longitude', value=-0.783)
+    timezone = st.number_input('Timezone', value=0)
+    start_day = st.number_input('Start Day', value=212)
+    end_day = st.number_input('End Day', value=212)
+    time_series_step = st.number_input('Time Series Step', value=1)
+    january_first = st.number_input('January First', value=1)
+    daylight_savings = st.text_input('Daylight Savings', value="not applicable")
+    leap_day_included = st.checkbox('Leap Day Included', value=False)
+    direct_beam_conversion_needed = st.checkbox('Direct Beam Conversion Needed', value=False)
 
 external_conditions = {
     "air_temperatures": air_temperatures,
@@ -102,13 +101,12 @@ external_conditions = {
 }
 
 # Input for InternalGains
-st.header('InternalGains')
+with st.expander('InternalGains', expanded=False):
+    def get_schedule(label):
+        return get_list_input(f'{label} Schedule', 24, 3.2)
 
-def get_schedule(label):
-    return get_list_input(f'{label} Schedule', 24, 3.2)
-
-metabolic_gains_schedule = get_schedule('Metabolic Gains')
-other_gains_schedule = get_schedule('Other Gains')
+    metabolic_gains_schedule = get_schedule('Metabolic Gains')
+    other_gains_schedule = get_schedule('Other Gains')
 
 internal_gains = {
     "metabolic gains": {
@@ -128,16 +126,15 @@ internal_gains = {
 }
 
 # Input for ApplianceGains
-st.header('ApplianceGains')
+with st.expander('ApplianceGains', expanded=False):
+    def get_appliance_schedule(label):
+        return get_list_input(f'{label} Schedule', 8, 32.0)
 
-def get_appliance_schedule(label):
-    return get_list_input(f'{label} Schedule', 8, 32.0)
+    lighting_schedule = get_appliance_schedule('Lighting')
+    cooking_schedule = get_appliance_schedule('Cooking')
 
-lighting_schedule = get_appliance_schedule('Lighting')
-cooking_schedule = get_appliance_schedule('Cooking')
-
-lighting_main_schedule = [{"value": "8hrs", "repeat": 3}]
-cooking_main_schedule = [{"value": "8hrs", "repeat": 3}]
+    lighting_main_schedule = [{"value": "8hrs", "repeat": 3}]
+    cooking_main_schedule = [{"value": "8hrs", "repeat": 3}]
 
 appliance_gains = {
     "lighting": {
